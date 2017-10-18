@@ -3,7 +3,10 @@ from EventHandler import *
 class ui:
 
 	hour1 = 0
+	hour2 = 0
 	minute1 = 0
+	minute2 = 0
+	timehalf1 = 'AM'
 	timehalf1 = 'AM'
 	notification = 0
 	handler = eventhandler()
@@ -33,7 +36,7 @@ class ui:
 			flag = 0
 			print "Error. Somehow timehalf not AM or PM. Aborting."
 		if flag == 1:
-			self.handler.Add(self.hour1, self.minute1, self.timehalf1, self.notification)
+			self.handler.Add(self.hour1, self.minute1, self.hour2, self.minute2, self.timehalf1, self.notification)
 		return;
 
 
