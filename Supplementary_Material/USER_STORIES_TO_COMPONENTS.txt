@@ -1,0 +1,131 @@
+*** NOTE: THIS FILE IS SPLIT INTO THE DIFFERENT COMPONENTS, USER STORIES DIVIDED INTO EACH ***
+*** NOTE: "SECTION" DENOTES A BATCH OF USER STORIES WHOSE FUNCTIONS ARE INTERCONNECTED AND WOULD PROBABLY HAVE TO BE BUILT BY THE SAME PERSON ***
+*** NOTE: SOME USER STORIES MAY EXIST IN 2 COMPONENTS. THEY WILL BE DISTINGUISHED BY [CALL] FOR COMPONENT THAT CALLS FOR CHANGE AND [PERFORM] FOR COMPONENT
+		THAT ACTUALLY IMPLEMENTS THAT CHANGE. SO [CALL] WILL SET PARAMETERS AND [PERFORM] WILL USE THOSE PARAMETERS IN ACTUAL CODE. ***
+*** NOTE: FEEL FREE TO MAKE ALL THE EDITS YOU PLEASE TO THIS. ***
+
++++ MAIN +++
+= SECTION =
+	>Only create object of UI to begin	
+
++++ UI +++
+= SECTION = <NICK>
+	>User, I want to add events to my daily planner [CALL]
+	>User, I want to set specific times to each event [CALL]
+	>User, I want to change said times for each event [CALL]
+	>User, I want to be altered of schedule collisions upon adding an event [CALL]
+	>User, I want different notifications ranked by urgency. I can choose what event gets what level of notification. [CALL]
+= SECTION = <SPENCER>
+	#NOTE: Select delete, ask "delete which event?", print all events with numbers, user selects number,
+		#number passed in as parameter to Event Handler, Event Handler uses number as index
+	>User, I want to delete events from schedule [CALL]
+= SECTION = <NICK>
+	>User, I want to set events that have a time range of effect [CALL]
+= SECTION = <NICK>
+	>User, I want to set an event to be performed at some point between two times [CALL]
+= SECTION = <JP>
+	>User, I want to print the full routine to terminal [CALL]
+	>User, I want to print out events in a time range [CALL]
+	>User, listed events should be seen as completed or not [CALL]
+= SECTION = <SPENCER>
+	>User, I want to be able to set specific events to not notify me [CALL]
+= SECTION = <SPENCER>
+	>User, I want to import a schedule from file [CALL]
+	>User, I want to export a schedule to file [CALL]
+	>User, I want exported schedules to be listed with a command 
+		--and simply selected and applied [CALL]
+	>User, I want to be able to import/export single events into my current schedule [CALL]
+= SECTION = <NICK>
+	>Administrator, I want to go to a specific time for debugging [CALL]
+	>Administrator, I want to change the time scale [CALL]
+= SECTION = <JP>
+	>User, I want to set a task as COMPLETED [CALL]
+
+
++++ TICKER +++
+= SECTION = <NICK>
+	>User, I want to have a notification for all events [CALL]
+	>User, I want to be able to shut off alarms for range events
+	>User, I want to be able to "put off" a general event and be re-notified within some timeframe within the time range
+	>User, If I put off the general event too long, alert me [CALL]
+	>User, I want to be notified how many more times I can "Snooze" on a general event before I overshoot it. [CALL]
+= SECTION = <NICK>
+	>Administrator, I want to go to a specific time for debugging [PERFORM]
+	>Administrator, I want to change the time scale [PERFORM]
+	>Administrator, I want to be able to sync with the system clock (This is a trivial part of the system)
+= SECTION = <NICK>
+	>User, when the day loops, all tasks set to not complete [CALL]
+
+
++++ EVENT HANDLER +++
+= SECTION = <SPENCER>
+	>User, I want to add events to my daily planner [PERFORM]
+	>User, I want to set specific times to each event [PERFORM]
+	>>User, I want to be altered of schedule collisions upon adding an event [PERFORM]
+= SECTION = <NICK>
+	>User, I want to change said times for each event [PERFORM]
+	>>User, I want to be altered of schedule collisions upon adding an event [ALSO PERFORM FOR THIS]
+= SECTION = <SPENCER>
+	>User, I want to delete events from schedule [PERFORM]
+= SECTION = <NICK>
+	>User, I want to set events that have a time range of effect [PERFORM]
+	>User, I want to be altered of schedule collisions upon adding an event [ANOTHER PERFORM]
+= SECTION = <NICK>
+	>User, I want to set an event to be performed at some point between two times [PERFORM]
+	>>User, I want to be altered of schedule collisions upon adding an event [PERFORM HERE, TOO]
+= SECTION = <JP>
+	>User, I want to print the full routine to terminal [PERFORM]
+	>User, I want to print out events in a time range [PERFORM]
+	>User, listed events should be seen as completed or not [PERFORM]
+= SECTION = <NICK>
+	>User, I want to have a notification for all events [PERFORM]
+	>User, I want to be able to set specific events to not notify me [PERFORM]
+	>User, I want different notifications ranked by urgency. I can choose what event gets what level of notification. [PERFORM]
+= SECTION = <NICK>
+	>User, If I put off the general event too long, alert me [PERFORM]
+	>User, I want to be notified how many more times I can "Snooze" on a general event before I overshoot it. [PERFORM]
+= SECTION = <SPENCER>
+	>User, I want to import a schedule from file [PERFORM]
+	>User, I want to export a schedule to file [PERFORM]
+	>User, I want to apply exported schedules from a list [PERFORM]
+	>User, I want imported schedules to be added to the list of saved schedules
+	>User, I want to be able to import/export single events into my current schedule [PERFORM]
+= SECTION = <JP>
+	>User, I want to set a task as COMPLETED [PERFORM]
+= SECTION = <NICK>
+	>User, when the day loops, all tasks set to not complete [PERFORM]
+
+
+
++++ DATASET +++
+= SECTION = <SPENCER>
+	>Takes different calls from EVENT HANDLER to alter data. Setters and Getters.
+
+
++++ EVENT +++
+= SECTION = <NICK>
+	>REGULAR EVENT, GENERAL EVENT, and RANGE EVENT are stored in DATASET as type EVENT
+
+
++++ REGULAR EVENT +++
+= SECTION = <NICK>
+	>Will have data for Notification_Level
+	>Will have a boolean for "completed"
+	>Will Have its set time
+	>Will have methods to print and do operations when called on from the event handler via the EVENT superclass.
+
+
++++ GENERAL EVENT +++
+= SECTION = <NICK>
+	>Will have data for Notification_Level
+	>Will have a boolean for "completed"
+	>Will Have its set time range
+	>Will have methods to print and do operations when called on from the event handler via the EVENT superclass.
+
+
++++ RANGE EVENT +++
+= SECTION = <NICK>
+	>Will have data for Notification_Level
+	>Will have a boolean for "completed"
+	>Will Have its set time range
+	>Will have methods to print and do operations when called on from the event handler via the EVENT superclass.
