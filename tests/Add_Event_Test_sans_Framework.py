@@ -5,8 +5,6 @@ from  UI import *
 
 Run_Program = ui()
 
-Run_Program.RunMenu() #Will be a tiny test to make sure this component will work. At first will only have one displayed option.
-
 Run_Program.hour1 = 11;
 Run_Program.minute1 = 3;
 Run_Program.timehalf1 = "PM";
