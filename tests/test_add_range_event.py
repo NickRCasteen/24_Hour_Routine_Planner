@@ -11,17 +11,17 @@ from UI import *
 Run_Program = ui()
 
 def test_add_single_event_correct1():
-	Run_Program.hour1 = 11;
-	Run_Program.minute1 = 3;
-	Run_Program.timehalf1 = "PM";
-	Run_Program.notification = 1;
+	Run_Program.hour1 = 11
+	Run_Program.minute1 = 3
+	Run_Program.timehalf1 = "PM"
+	Run_Program.notification = 1
 	assert Run_Program.AddEvent() == 1
 
 def test_add_single_event_error():
-	Run_Program.hour1 = 32;
-	Run_Program.minute1 = 22;
-	Run_Program.timehalf1 = "AM";
-	Run_Program.notification = 7;
+	Run_Program.hour1 = 32
+	Run_Program.minute1 = 22
+	Run_Program.timehalf1 = "AM"
+	Run_Program.notification = 7
 	assert Run_Program.AddEvent() == 0
 
 def test_parser_single_event_correct():
@@ -36,14 +36,14 @@ def test_parser_single_event_error():
 	assert Run_Program.ParseTime(1) == 0
 
 def test_add_double_evnet_correct():
-	Run_Program.hour1 = 12;
-	Run_Program.minute1 = 16;
-	Run_Program.timehalf1 = "AM";
-	Run_Program.notification = 3;
-	Run_Program.hour2 = 11;
-	Run_Program.minute2 = 10;
-	Run_Program.timehalf2 = "PM";
-	Run_Program.notification = 3;
+	Run_Program.hour1 = 12
+	Run_Program.minute1 = 16
+	Run_Program.timehalf1 = "AM"
+	Run_Program.notification = 3
+	Run_Program.hour2 = 11
+	Run_Program.minute2 = 10
+	Run_Program.timehalf2 = "PM"
+	Run_Program.notification = 3
 	assert Run_Program.AddEvent() == 1
 
 def test_parase_double_event_correct():
