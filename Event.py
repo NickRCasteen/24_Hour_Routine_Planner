@@ -36,7 +36,13 @@ class SetEvent(object):
 			x = hr + 12
 
 		return x
+	
 
+	def toFile(self):
+		dlim = '|'
+		output = "0"
+		output += dlim + str(self.hour1) + dlim + str(self.minute1) + dlim + str(self.timehalf1) + dlim + str(self.notification)
+		return output
 
 
 
@@ -93,6 +99,15 @@ class RangeEvent(object):
 
 		return x
 
+	
+	def toFile(self):
+		dlim = '|'
+		output = "1"
+		output += dlim + str(self.hour1) + dlim + str(self.hour2) + dlim \
+				  + str(self.minute1) + dlim + str(self.minute2) + dlim \
+				   + str(self.timehalf1) + dlim + str(self.timehalf2) + dlim \
+				  + str(self.notification)
+		return output
 
 
 
@@ -147,6 +162,16 @@ class GeneralEvent(object):
 			x = hr + 12
 
 		return x
+
+
+	def toFile(self):
+		dlim = '|'
+		output = "2"
+		output += dlim + str(self.hour1) + dlim + str(self.hour2) + dlim \
+				  + str(self.minute1) + dlim + str(self.minute2) + dlim \
+				  + str(self.timehalf1) + dlim + str(self.timehalf2) + dlim \
+				  + str(self.notification)
+		return output
 
 
 
