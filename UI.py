@@ -1,7 +1,8 @@
 from EventHandler import * 
+from Ticker import *
 import pytest
 
-class ui:
+class ui(object):
 
 	hour1 = 0 #Info to pass in
 	hour2 = 0 #Info to pass in
@@ -24,6 +25,7 @@ class ui:
 		while exit == 1:
 			print "[1] Add Event To Schedule"
 			print "[2] Edit a Node"
+			print "[3] Begin Clock"
 			print "[0] Exit"
 
 			userselection = raw_input("Enter Selection\n")
@@ -34,6 +36,9 @@ class ui:
 
 			elif userselection == '2':
 				self.EESelection()
+			elif userselection == '3':
+				clockobj = clock(self.handler)
+				clockobj.startClock()
 
 			elif userselection == '0':
 				exit = 0
@@ -66,8 +71,8 @@ class ui:
 				if i.isalpha():
 					valid = 0 #Check for if what was inputted was a number or not
 			if valid == 1:
-				notification = int(noti_string)
-				if notification > 9:
+				self.notification = int(noti_string)
+				if self.notification > 9:
 					valid = 0 #A check to make sure they only input 0 through 9
 					print "Numbers 0 to 9 only"
 			else:
@@ -150,6 +155,11 @@ class ui:
 	def EESelection(self):
 		valid = 0
 		EventIndex = 0
+		self.hour1 = 0
+		self.hour2 = 0
+		self.minute1 = 0
+		self.minute2 = 0
+
 
 		print "Which Event would you like to edit?"
 		self.PrintEventsInScehdule()
