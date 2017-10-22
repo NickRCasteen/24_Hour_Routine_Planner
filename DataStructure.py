@@ -3,9 +3,11 @@
 import os
 import glob
 import pytest
+
 from Event import *
 
-class datastruct:
+class datastruct(object):
+
     name = "Default Schedule"
     dlim = ":"
     dataPath = 'Data/'
@@ -77,6 +79,8 @@ class datastruct:
 	#++FOR ACTIVATING TICKER
     def getSchedule(self):
         return self.sched
+
+
 
 #d = datastruct()
 
