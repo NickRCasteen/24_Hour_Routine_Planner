@@ -26,6 +26,8 @@ class ui(object):
 			print "[1] Add Event To Schedule"
 			print "[2] Edit a Node"
 			print "[3] Begin Clock"
+			print "[8] Export to file"
+			print "[9] Import from file"
 			print "[0] Exit"
 
 			userselection = raw_input("Enter Selection\n")
@@ -39,6 +41,13 @@ class ui(object):
 			elif userselection == '3':
 				clockobj = clock(self.handler)
 				clockobj.startClock()
+
+			# Export
+			elif userselection == '8':
+				self.ExSelection()
+			# Import
+			elif userselection == '9':
+				self.ImSelection()
 
 			elif userselection == '0':
 				exit = 0
@@ -226,6 +235,67 @@ class ui(object):
 
 				self.handler.Edit(self.hour1,self.hour2,self.minute1,self.minute2,self.timehalf1,self.timehalf2,1,EventIndex)
 
+	def ExSelection(self):
+		valid = 0
+		intxt = ""
+
+		print "Schedule or Task?"
+
+		while valid == 0:
+			intxt = raw_input("\n")
+			valid = 1
+			if intxt != 'Schedule' and intxt != 'Task':
+				print "Error. Bad input"
+				valid = 0
+		valid = 0
+
+		if intxt == "Task":
+			while valid == 0:
+				self.PrintEventsInScehdule()
+				intxt = raw_input("\n")
+				valid = 1
+				if int(intxt) > len(self.handler.schedule.sched):
+					print "Error. Index too large"
+					valid = 0
+				valid = 0
+			self.handler.FileEx(int(intxt))
+		else:
+			self.handler.FileEx(0)
+
+	def ImSelection(self):
+		valid = 0
+		intxt = ""
+
+		print "Schedule or Task?"
+
+		while valid == 0:
+			intxt = raw_input("\n")
+			valid = 1
+			if intxt != 'Schedule' and intxt != 'Task':
+				print "Error. Bad input"
+				valid = 0
+		valid = 0
+
+		print "Select a file"
+		if intxt == "Task":
+			nTask = self.handler.printTaskFiles()
+			while valid == 0:
+				intxt = raw_input("\n")
+				valid = 1
+				if int(intxt) > nTask:
+					print "Error. Bad index"
+					valid = 0
+			self.handler.FileIm(1, intxt)
+
+		else:
+			nSch = self.handler.printScheduleFiles()
+			while valid == 0:
+				intxt = raw_input("\n")
+				valid = 1
+				if int(intxt) > nSch:
+					print "Error. Bad index"
+					valid = 0
+			self.handler.FileIm(0, intxt)
 		
 #==================================================================================================================================================================
 #%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  ~~  BACKEND TOOLS ~~  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

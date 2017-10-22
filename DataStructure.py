@@ -20,14 +20,21 @@ class datastruct(object):
             if not os.path.isdir(self.dataPath):
                 raise
 
-    def print_files(self):
-        files = glob.glob(os.path.join(self.dataPath, '*.sch'))
+    def getFiles(self, flag):
+        if flag == 0:
+            return glob.glob(os.path.join(self.dataPath, '*.sch'))
+        else:
+            return glob.glob(os.path.join(self.dataPath, '*.tsk'))
+
+    def print_files(self, flag):
+        files = self.getFiles(flag)
         i = 1
         for infile in files:
             f = open(infile)
-            print "[{}] : {}".format(i, f.read())
+            print "[{}] : {}".format(i, f.name)
             f.close()
             i += 1
+        return i
 
     def import_file(self, fpath):
         f = open(fpath)
@@ -38,26 +45,30 @@ class datastruct(object):
             ed = s.split("|")
             ty = int(ed.pop(0))
             if ty == 0:
-                self.CreateEvent(int(ed.pop(0)), int(ed.pop(0)), int(ed.pop(0)), int(ed.pop(0)))
+                self.CreateEvent(int(ed.pop(0)), int(ed.pop(0)), ed.pop(0), int(ed.pop(0)))
             elif ty == 1:
-                self.CreateEvent2time(int(ed.pop(0)), int(ed.pop(0)), int(ed.pop(0)), int(ed.pop(0)), int(ed.pop(0)), int(ed.pop(0)), int(ed.pop(0)), 0 )
+                self.CreateEvent2time(int(ed.pop(0)), int(ed.pop(0)), int(ed.pop(0)), int(ed.pop(0)), ed.pop(0), ed.pop(0), int(ed.pop(0)), 0 )
             elif ty == 2:
-                self.CreateEvent2time(int(ed.pop(0)), int(ed.pop(0)), int(ed.pop(0)), int(ed.pop(0)), int(ed.pop(0)), int(ed.pop(0)), int(ed.pop(0)), 1)
+                self.CreateEvent2time(int(ed.pop(0)), int(ed.pop(0)), int(ed.pop(0)), int(ed.pop(0)), ed.pop(0), ed.pop(0), int(ed.pop(0)), 1)
             else:
                 print("ERR: IMPORT" + ty)
 
         f.close()
 
     def export_file(self, flag):
-        if(flag == "Schedule"):
-            fpath = self.dataPath + 'out.sch'
-        elif(flag == "Task"):
-            fpath = self.dataPath + 'out.tsk'
-        f = open(fpath, "w")
-        f.write(self.name)
+        if(flag == 0):
+            fpath = self.dataPath + self.name + '.sch'
+            f = open(fpath, "w")
+            f.write(self.name)
 
-        for sch in self.sched:
-            f.write(self.dlim + sch.toFile())
+            for sch in self.sched:
+                f.write(self.dlim + sch.toFile())
+
+        else:
+            fpath = self.dataPath + 'out.tsk'
+            f = open(fpath, "w")
+            f.write(self.name + self.dlim)
+            f.write(self.sched[flag-1].toFile())
 
         f.close()
 
