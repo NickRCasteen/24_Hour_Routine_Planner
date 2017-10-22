@@ -6,6 +6,8 @@ import pytest
 from Event import *
 
 class datastruct:
+    name = "Default Schedule"
+    dlim = ":"
     dataPath = 'Data/'
     sched = []  # What will hold all the event objects. Here we define operations for the data.
 
@@ -27,37 +29,54 @@ class datastruct:
 
     def import_file(self, fpath):
         f = open(fpath)
-        ##Do_stuff
+
+        input = f.read().split(self.dlim)
+        self.name = input.pop(0)
+        for s in input:
+            ed = s.split("|")
+            ty = int(ed.pop(0))
+            if ty == 0:
+                self.CreateEvent(int(ed.pop(0)), int(ed.pop(0)), int(ed.pop(0)), int(ed.pop(0)))
+            elif ty == 1:
+                self.CreateEvent2time(int(ed.pop(0)), int(ed.pop(0)), int(ed.pop(0)), int(ed.pop(0)), int(ed.pop(0)), int(ed.pop(0)), int(ed.pop(0)), 0 )
+            elif ty == 2:
+                self.CreateEvent2time(int(ed.pop(0)), int(ed.pop(0)), int(ed.pop(0)), int(ed.pop(0)), int(ed.pop(0)), int(ed.pop(0)), int(ed.pop(0)), 1)
+            else:
+                print("ERR: IMPORT" + ty)
+
         f.close()
 
     def export_file(self, flag):
         if(flag == "Schedule"):
-            fpath = 'out.sch'
+            fpath = self.dataPath + 'out.sch'
         elif(flag == "Task"):
-            fpath = 'out.tsk'
+            fpath = self.dataPath + 'out.tsk'
         f = open(fpath, "w")
-        f.writelines("Output Name")
-        ##Do_stuff
+        f.write(self.name)
+
+        for sch in self.sched:
+            f.write(self.dlim + sch.toFile())
+
         f.close()
 
-	#++CREATE 1
-	def CreateEvent(self, dph1, dpm1, dpt1, dpn):
-		self.addToSchedule(SetEvent(dph1, dpm1, dpt1, dpn))
+    #++CREATE 1
+    def CreateEvent(self, dph1, dpm1, dpt1, dpn):
+        self.addToSchedule(SetEvent(dph1, dpm1, dpt1, dpn))
 
 	#++CREATE 2
-	def CreateEvent2time(self, dph1, dph2, dpm1, dpm2, dpt1, dpt2, dpn, flag):
+    def CreateEvent2time(self, dph1, dph2, dpm1, dpm2, dpt1, dpt2, dpn, flag):
 		if flag == 0:
 			self.addToSchedule(RangeEvent(dph1, dph2, dpm1, dpm2, dpt1, dpt2, dpn)) #Flag will be passed in as a means to keep track
 		else:
 			self.addToSchedule(GeneralEvent(dph1, dph2, dpm1, dpm2, dpt1, dpt2, dpn)) #Flag will be passed in as a means to keep track
 
 	#++ADD TO DATASTRUCTURE LIST
-	def addToSchedule(self,a):
-		self.sched.append(a) #Add the Event
+    def addToSchedule(self,a):
+        self.sched.append(a) #Add the Event
 
 	#++FOR ACTIVATING TICKER
-	def getSchedule(self):
-		return self.sched
+    def getSchedule(self):
+        return self.sched
 
 #d = datastruct()
 
