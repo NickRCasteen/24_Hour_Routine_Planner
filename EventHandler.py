@@ -29,4 +29,16 @@ class eventhandler(object):
 	def GetSchedule(self):
 		return self.schedule.getSchedule()
 
-	
+	def printTaskFiles(self):
+		return self.schedule.print_files(1)
+
+	def printScheduleFiles(self):
+		return self.schedule.print_files(0)
+
+	def FileEx(self, scope):
+		# Export Schedule
+		self.schedule.export_file(scope)
+
+	def FileIm(self, flag, scope):
+		files = self.schedule.getFiles(flag)
+		self.schedule.import_file(files[int(scope)-1])
