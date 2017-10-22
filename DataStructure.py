@@ -6,6 +6,7 @@ import pytest
 from Event import *
 
 class datastruct:
+    name = "Default Schedule"
     dataPath = 'Data/'
     sched = []  # What will hold all the event objects. Here we define operations for the data.
 
@@ -27,7 +28,21 @@ class datastruct:
 
     def import_file(self, fpath):
         f = open(fpath)
-        ##Do_stuff
+
+        input = f.read().split(":")
+        self.name = input.pop(0)
+        for s in input:
+            ed = s.split(":")
+            ty = ed.pop(0)
+            if ty == 0:
+                self.CreateEvent(ed.pop(0), ed.pop(0), ed.pop(0), ed.pop(0))
+            elif ty == 1:
+                self.CreateEvent2time(ed.pop(0), ed.pop(0), ed.pop(0), ed.pop(0), ed.pop(0), ed.pop(0), ed.pop(0), 0 )
+            elif ty == 2:
+                self.CreateEvent2time(ed.pop(0), ed.pop(0), ed.pop(0), ed.pop(0), ed.pop(0), ed.pop(0), ed.pop(0), 1)
+            else:
+                print("ERR: IMPORT")
+
         f.close()
 
     def export_file(self, flag):
@@ -36,11 +51,14 @@ class datastruct:
         elif(flag == "Task"):
             fpath = 'out.tsk'
         f = open(fpath, "w")
-        f.writelines("Output Name")
-        ##Do_stuff
+        f.write(self.name + ":")
+
+        for sch in self.sched:
+            f.write(":" + sch.toFile())
+
         f.close()
 
-	#++CREATE 1
+    #++CREATE 1
 	def CreateEvent(self, dph1, dpm1, dpt1, dpn):
 		self.addToSchedule(SetEvent(dph1, dpm1, dpt1, dpn))
 
