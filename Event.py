@@ -41,14 +41,14 @@ class SetEvent(object):
 		output += dlim + str(self.hour1) + dlim + str(self.minute1) + dlim + str(self.timehalf1) + dlim + str(self.notification)
 		return output
 
-	def setToCompleted(self, complete):
+	def setToCompleted(self):
 		if self.complete == "Done":
 			return True
 		elif self.complete == "Not Done":
 			return False
 
 	def completedEvent(self):
-		if complete is True:
+		if self.complete is True:
 			print("The event is completed")
 		else:
 			print("This event is not completed")
