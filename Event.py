@@ -1,6 +1,3 @@
-import pytest
-
-
 #+++ SET +++	
 class SetEvent(object):
 
@@ -11,6 +8,7 @@ class SetEvent(object):
         timehalf1 = 'AM'
         #timehalf2 = 'AM'
         notification = 0
+	comp = False
 
         hour1_24hr1 = 0
 
@@ -44,7 +42,17 @@ class SetEvent(object):
 		output += dlim + str(self.hour1) + dlim + str(self.minute1) + dlim + str(self.timehalf1) + dlim + str(self.notification)
 		return output
 
+	def setToCompleted(self):
+		if self.comp == False:
+			return True
+		elif self.comp == True:
+			return False
 
+	def completedEvent(self):
+		if self.comp is True:
+			print("The event is completed")
+		else:
+			print("This event is not completed")
 
 #+++ RANGE +++
 class RangeEvent(object):
@@ -198,12 +206,3 @@ def test_Range_Event_Creation():
 	assert newThing.minute2 == 47
 	assert newThing.timehalf2 == 'PM'
 
-def test_General_Event_Creation():
-        newThing = GeneralEvent(12, 11, 22, 47, 'AM', 'PM', 8) #12:22 AM to 11:47 PM with notifcation 8
-        assert newThing.hour1 == 12
-        assert newThing.minute1 == 22
-        assert newThing.timehalf1 == 'AM'
-        assert newThing.notification == 8
-        assert newThing.hour2 == 11
-        assert newThing.minute2 == 47
-        assert newThing.timehalf2 == 'PM'
