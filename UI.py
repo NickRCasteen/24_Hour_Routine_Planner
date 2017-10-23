@@ -369,12 +369,13 @@ class ui(object):
 
 
 	def PrintEventsInScehdule(self):
-		for i in (self.handler.schedule)
-			print (str(i.hour1) + str(i.minute1)
+		#for i in (self.handler.schedule.sched)
+			#print (str(i.hour1) + str(i.minute1)
+		pass
 
 
 	def completedEvent(self):
-		if complete is True:
+		if 1 == 1:
 			print("The event is completed")
 		else:
 			print("This event is not completed")
