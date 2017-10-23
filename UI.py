@@ -376,9 +376,9 @@ class ui(object):
 
 	def completedEvent(self):
 		if 1 == 1:
-			print("The event is completed")
+			print "The event is completed"
 		else:
-			print("This event is not completed")
+			print "This event is not completed"
 
 
 
