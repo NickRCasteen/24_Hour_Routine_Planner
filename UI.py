@@ -1,6 +1,6 @@
 from EventHandler import * 
 from Ticker import *
-import pytest
+
 
 class ui(object):
 
@@ -20,12 +20,13 @@ class ui(object):
 
 	def RunMenu(self):
 		exit = 1;
-		print "Welcome to The 24-Hour-Planner by Team Omicrom Prime.\n Nicholas Casteen\n Jon Paul\n Spencer Graff"
+		print "Welcome to The 24-Hour-Planner by Team Omicrom Prime.\n Nicholas Casteen\n John Lee\n Spencer Graff"
 
 		while exit == 1:
 			print "[1] Add Event To Schedule"
 			print "[2] Edit a Node"
 			print "[3] Begin Clock"
+			print "[4] Set task to completed"
 			print "[8] Export to file"
 			print "[9] Import from file"
 			print "[0] Exit"
@@ -368,7 +369,16 @@ class ui(object):
 
 
 	def PrintEventsInScehdule(self):
-		pass #JP, this is your domain. Please print them in the order they appear in the actual data structure. Numbered 0 to n.
+		for i in (self.handler.schedule)
+			print (str(i.hour1) + str(i.minute1)
+
+
+	def completedEvent(self):
+		if complete is True:
+			print("The event is completed")
+		else:
+			print("This event is not completed")
+
 
 
 
