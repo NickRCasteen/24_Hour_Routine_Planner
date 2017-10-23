@@ -8,6 +8,7 @@ class SetEvent(object):
         timehalf1 = 'AM'
         #timehalf2 = 'AM'
         notification = 0
+	complete = False
 
         hour1_24hr1 = 0
 
@@ -42,9 +43,9 @@ class SetEvent(object):
 		return output
 
 	def setToCompleted(self):
-		if self.complete == "Done":
+		if self.complete == False:
 			return True
-		elif self.complete == "Not Done":
+		elif self.complete == True:
 			return False
 
 	def completedEvent(self):
